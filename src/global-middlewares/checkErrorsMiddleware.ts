@@ -16,9 +16,9 @@ export const checkErrorsMiddleware = (req: Request, res: Response, next: NextFun
     if (!errors.isEmpty()) {
         const errorsArray = errors.array({onlyFirstError: true}) as { path: FieldNamesType, msg: string }[]
         // const errorsArray = errors
-        res.send(errorsArray)
+        // res.send(errorsArray)
         
-        res.status(400).json({ errorsMessages: errorsArray.map(err => ({field: err.path, message: err.msg})) })
+        res.status(400).json({ errorsMessages: errorsArray.map(err => ({message: err.msg, field: err.path})) })
         return
     } else {
         next()
