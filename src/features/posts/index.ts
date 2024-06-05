@@ -5,6 +5,7 @@ import { findPostController } from "./controllers/findPostController";
 import { updatePostController } from "./controllers/updatePostController";
 import { deletePostController } from "./controllers/deltePostController";
 import { postValidators } from "./middlewares/postValidators";
+import { authMiddleware } from "../../global-middlewares/authMiddleware";
 
 
 export const postsRouter = Router({})
@@ -13,4 +14,4 @@ postsRouter.get('/', getAllPostsController)
 postsRouter.post('/', ...postValidators, createPostController)
 postsRouter.get('/:id', findPostController)
 postsRouter.put('/:id', ...postValidators, updatePostController)
-postsRouter.delete('/:id', deletePostController)
+postsRouter.delete('/:id', authMiddleware, deletePostController)
